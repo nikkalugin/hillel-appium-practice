@@ -105,14 +105,14 @@ describe('Homework for Lection 18', () => {
         await expect($('//android.widget.TextView[@text="Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"]')).toBeDisplayed();
     });
 
-    it('Passwords do nat match', async () => {
+    it.only('Passwords do nat match', async () => {
         await $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[1]').setValue('TestFirstName');
         await $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[2]').setValue('TestLastName');
         await $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[3]').setValue('test@test.com');
         await $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[4]').setValue('QweQwe123!');
         await $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[5]').setValue('QweQwe123');
         await $('//android.widget.TextView[@text="Register"]').click();
-        await expect($($('//android.widget.TextView[@text="Passwords do not match"]'))).toBeDisplayed();
+        await expect($('//android.widget.TextView[@text="Passwords do not match"]')).toBeDisplayed();
     });
 
     it('Successful registration', async () => {
