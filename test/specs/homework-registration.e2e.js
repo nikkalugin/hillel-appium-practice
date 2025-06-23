@@ -2,12 +2,33 @@ import { $, driver, expect } from '@wdio/globals'
 import { randomUserEmail } from '../../credentials/credentials';
 
 describe('Homework for Lection 18', () => {
+    const clickMenuItemByIndex = async (index) => {
+        const { width: screenWidth, height: screenHeight } = await driver.getWindowRect();
+        const menuTopY = Math.floor(screenHeight * 0.07);
+        const menuBottomY = Math.floor(screenHeight * 0.33);
+        const menuLeftX = Math.floor(screenWidth * 0.61);
+        const menuRightX = Math.floor(screenWidth * 0.98);
+
+        const menuItemHeight = Math.floor((menuBottomY - menuTopY) / 6);
+        const clickX = menuLeftX + Math.floor((menuRightX - menuLeftX) / 2);
+        const clickY = menuTopY + index * menuItemHeight + Math.floor(menuItemHeight / 2);
+        await driver.action('pointer').move(clickX, clickY)
+            .down()
+            .pause(100)
+            .up()
+            .perform();
+    };
+
     beforeEach(async () => {
         await driver.activateApp("com.hillelAuto");
         await $('//android.widget.TextView[@text="Sign up"]').click();
     });
 
     afterEach(async () => {
+        if (await $('//android.widget.TextView[@text="Garage"]').isDisplayed()) {
+            await $('//android.widget.TextView[@text="My Profile"]').click();
+            await clickMenuItemByIndex(5);
+        }
         await driver.terminateApp("com.hillelAuto");
     });
 
