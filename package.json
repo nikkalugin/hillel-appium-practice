@@ -12,6 +12,9 @@
   },
   "scripts": {
     "start-emulator": "emulator -avd Pixel_4",
-    "test": "npx wdio run ./wdio.conf.js --spec homework-native-actions.e2e.js"
+    "test": "npx wdio run ./wdio.conf.js --spec homework-registration.e2e.js"
+  },
+  "dependencies": {
+    "uuid": "^11.1.0"
   }
 }
