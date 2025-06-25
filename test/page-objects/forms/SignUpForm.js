@@ -5,19 +5,19 @@ class SignUpForm {
     }
 
     get lastNameField() {
-        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[1]');
+        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[2]');
     }
 
     get emailField() {
-        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[1]');
+        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[3]');
     }
 
     get passwordField() {
-        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[1]');
+        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[4]');
     }
 
     get reenterPasswordField() {
-        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[1]');
+        return $('//android.widget.TextView[@text="Name"]/following-sibling::android.widget.EditText[5]');
     }
 
     get registerBtn() {

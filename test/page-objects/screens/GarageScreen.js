@@ -5,7 +5,7 @@ class GarageScreen {
     }
 
     get profileBtn() {
-        return $('//android.widget.TextView[@text="My Profile"]');
+        return $('~My profile');
     }
 
     async clickMenuItemByIndex(index) {
@@ -27,10 +27,6 @@ class GarageScreen {
 
     async openProfile() {
         await this.profileBtn.click();
-    }
-
-    async clickLogoutBtn() {
-        await this.clickMenuItemByIndex(5);
     }
 }
 
