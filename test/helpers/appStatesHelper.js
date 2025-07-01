@@ -1,6 +1,6 @@
 export async function activateApp(appPackage) {
     try {
-        await activateApp(appPackage);
+        await driver.activateApp(appPackage);
     } catch (error) {
         console.error(`Failed to activate app: ${error}`);
         throw error;
@@ -9,7 +9,7 @@ export async function activateApp(appPackage) {
 
 export async function terminateApp(appPackage) {
     try {
-        await terminateApp(appPackage);
+        await driver.terminateApp(appPackage);
     } catch (error) {
         console.error(`Failed to terminate app: ${error}`);
         throw error;

@@ -1,5 +1,7 @@
 export async function selectMenuItemByIndex(index, itemsNumber, dropdownLocation) {
+
     const { width: screenWidth, height: screenHeight } = await driver.getWindowRect();
+    
     const menuTopY = Math.floor(screenHeight * (dropdownLocation.topY / screenHeight));
     const menuBottomY = Math.floor(screenHeight * (dropdownLocation.bottomY / screenHeight));
     const menuLeftX = Math.floor(screenWidth * (dropdownLocation.leftX / screenWidth));

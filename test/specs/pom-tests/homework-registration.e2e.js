@@ -3,7 +3,7 @@ import { randomUserEmail, users } from '../../../credentials/credentials';
 import HomeScreen from '../../page-objects/screens/HomeScreen';
 import SignUpForm from '../../page-objects/forms/SignUpForm';
 import GarageScreen from '../../page-objects/screens/GarageScreen';
-import { activateApp, terminateApp } from '../../helpers/appStatesHellper';
+import { activateApp, terminateApp } from '../../helpers/appStatesHelper';
 
 describe('Homework for Lection 18', () => {
     beforeEach(async () => {
@@ -79,7 +79,7 @@ describe('Homework for Lection 18', () => {
         await expect(SignUpForm.passwordsDoNotMatchErrorMessage).toBeDisplayed();
     });
 
-    it.only('Successful registration', async () => {
+    it('Successful registration', async () => {
         await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, users.userRegistration.lastName, randomUserEmail, users.userRegistration.password, users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(GarageScreen.garageTitle).toBeDisplayed();
