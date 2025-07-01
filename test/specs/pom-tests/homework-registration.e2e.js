@@ -1,21 +1,19 @@
-import { driver, expect } from '@wdio/globals'
-import { randomUserEmail } from '../../../credentials/credentials';
+import { expect } from '@wdio/globals'
+import { randomUserEmail, users } from '../../../credentials/credentials';
 import HomeScreen from '../../page-objects/screens/HomeScreen';
 import SignUpForm from '../../page-objects/forms/SignUpForm';
 import GarageScreen from '../../page-objects/screens/GarageScreen';
+import { activateApp, terminateApp } from '../../helpers/appStatesHellper';
 
 describe('Homework for Lection 18', () => {
     beforeEach(async () => {
-        await driver.activateApp("com.hillelAuto");
+        await activateApp("com.hillelAuto");
         await HomeScreen.clickSignUpBtn();
     });
 
     afterEach(async () => {
-        if (await GarageScreen.garageTitle.isDisplayed()) {
-            await GarageScreen.openProfile();
-            await GarageScreen.clickMenuItemByIndex(5);
-        }
-        await driver.terminateApp("com.hillelAuto");
+        await GarageScreen.logOutIfLoggedIn();
+        await terminateApp("com.hillelAuto");
     });
 
     it('All fields are empty', async () => {
@@ -28,7 +26,7 @@ describe('Homework for Lection 18', () => {
     });
 
     it('Name value is invalid', async () => {
-        await SignUpForm.fillingValuesSignUpForm('123', 'TestLastName', 'test@test.com', 'QweQwe123!', 'QweQwe123!');
+        await SignUpForm.fillingValuesSignUpForm('123', users.userRegistration.lastName, users.userRegistration.email, users.userRegistration.password, users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(SignUpForm.invalidNameErrorMessage).toBeDisplayed();
     });
@@ -46,7 +44,7 @@ describe('Homework for Lection 18', () => {
     });
 
     it('Last Name value is invalid', async () => {
-        await SignUpForm.fillingValuesSignUpForm('TestFirstName', '123', 'test@test.com', 'QweQwe123!', 'QweQwe123!');
+        await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, '123', users.userRegistration.email, users.userRegistration.password, users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(SignUpForm.invalidLastNameErrorMessage).toBeDisplayed();
     });
@@ -64,25 +62,25 @@ describe('Homework for Lection 18', () => {
     });
 
     it('Email value is invalid', async () => {
-        await SignUpForm.fillingValuesSignUpForm('TestFirstName', 'TestLastName', '123', 'QweQwe123!', 'QweQwe123!');
+        await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, users.userRegistration.lastName, '123', users.userRegistration.password, users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(SignUpForm.invalidEmailErrorMessage).toBeDisplayed();
     });
 
     it('Password value is invalid', async () => {
-        await SignUpForm.fillingValuesSignUpForm('TestFirstName', 'TestLastName', 'test@test.com', '1', 'QweQwe123!');
+        await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, users.userRegistration.lastName, users.userRegistration.email, '1', users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(SignUpForm.invalidPasswordErrorMessage).toBeDisplayed();
     });
 
     it('Passwords do nat match', async () => {
-        await SignUpForm.fillingValuesSignUpForm('TestFirstName', 'TestLastName', 'test@test.com', 'QweQwe123!', 'QweQwe123');
+        await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, users.userRegistration.lastName, users.userRegistration.email, users.userRegistration.password, 'QweQwe123');
         await SignUpForm.clickRegisterBtn();
         await expect(SignUpForm.passwordsDoNotMatchErrorMessage).toBeDisplayed();
     });
 
     it.only('Successful registration', async () => {
-        await SignUpForm.fillingValuesSignUpForm('TestFirstName', 'TestLastName', randomUserEmail, 'QweQwe123!', 'QweQwe123!');
+        await SignUpForm.fillingValuesSignUpForm(users.userRegistration.name, users.userRegistration.lastName, randomUserEmail, users.userRegistration.password, users.userRegistration.password);
         await SignUpForm.clickRegisterBtn();
         await expect(GarageScreen.garageTitle).toBeDisplayed();
     });

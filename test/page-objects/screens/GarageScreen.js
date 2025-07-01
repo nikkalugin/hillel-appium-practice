@@ -1,3 +1,6 @@
+import { selectMenuItemByIndex } from "../../helpers/actions";
+import { myProfileMenuLocation } from "../../test-data/coordinates";
+
 class GarageScreen {
 
     get garageTitle() {
@@ -9,24 +12,18 @@ class GarageScreen {
     }
 
     async clickMenuItemByIndex(index) {
-        const { width: screenWidth, height: screenHeight } = await driver.getWindowRect();
-        const menuTopY = Math.floor(screenHeight * 0.07);
-        const menuBottomY = Math.floor(screenHeight * 0.33);
-        const menuLeftX = Math.floor(screenWidth * 0.61);
-        const menuRightX = Math.floor(screenWidth * 0.98);
-
-        const menuItemHeight = Math.floor((menuBottomY - menuTopY) / 6);
-        const clickX = menuLeftX + Math.floor((menuRightX - menuLeftX) / 2);
-        const clickY = menuTopY + index * menuItemHeight + Math.floor(menuItemHeight / 2);
-        await driver.action('pointer').move(clickX, clickY)
-            .down()
-            .pause(100)
-            .up()
-            .perform();
+        await selectMenuItemByIndex(index, 6, myProfileMenuLocation)
     };
 
     async openProfile() {
         await this.profileBtn.click();
+    }
+
+    async logOutIfLoggedIn() {
+        if (await this.garageTitle.isDisplayed()) {
+            await this.openProfile();
+            await this.clickMenuItemByIndex(5);
+        }
     }
 }
 
