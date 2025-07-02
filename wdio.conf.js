@@ -54,8 +54,8 @@ export const config = {
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
         // browserName: 'Chrome',
-        'appium:deviceName': 'Pixel 4',
-        'appium:platformVersion': '14.0',
+        'appium:deviceName': 'Pixel 4', // Pixel 4 - emulator, R58NA2W9FSF - real device
+        'appium:platformVersion': '14.0', // 14.0 - emulator, 12 - real device
         'appium:automationName': 'UiAutomator2',
         'appium:app': './app/apk-prod.apk'
     }],
