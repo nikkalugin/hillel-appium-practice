@@ -5,7 +5,7 @@ import SignUpForm from '../../page-objects/forms/SignUpForm';
 import GarageScreen from '../../page-objects/screens/GarageScreen';
 import { activateApp, terminateApp } from '../../helpers/appStatesHelper';
 
-describe('Homework for Lection 18', () => {
+describe('Registration tests', () => {
     beforeEach(async () => {
         await activateApp("com.hillelAuto");
         await HomeScreen.clickSignUpBtn();
